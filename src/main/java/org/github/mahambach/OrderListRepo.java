@@ -2,8 +2,9 @@ package org.github.mahambach;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class OrderListRepo {
+public class OrderListRepo implements OrderRepo {
     //Properties
     private final List<Order> orderList;
 
@@ -16,15 +17,23 @@ public class OrderListRepo {
     }
 
     //Methods
+    @Override
     public void addOrder(Order order){
         this.orderList.add(order);
     }
 
-    public void addOrder(List<Order> orders){
+    @Override
+
+    public void addOrders(List<Order> orders){
         this.orderList.addAll(orders);
     }
 
+    @Override
+    public int getNumberOfOrders() {
+        return this.orderList.size();
+    }
 
+    @Override
     public Order getOrderByID(int orderID){
         for(Order order : orderList){
             if(order.orderID() == orderID) return order;
@@ -32,7 +41,8 @@ public class OrderListRepo {
         return null;
     }
 
-    public List<Order> getAllOrdersOfClientID(String customerID){
+    @Override
+    public List<Order> getAllOrdersOfCustomerID(String customerID){
         List<Order> returnList = new ArrayList<>();
         for(Order order : orderList){
             if(order.customerID().equals(customerID)) returnList.add(order);
@@ -40,8 +50,29 @@ public class OrderListRepo {
         return returnList;
     }
 
+    @Override
     public List<Order> getAllOrders(){
         return this.orderList;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderListRepo that = (OrderListRepo) o;
+        return Objects.equals(orderList, that.orderList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderList);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderListRepo{" +
+                "orderList=" + orderList +
+                '}';
+    }
 }
