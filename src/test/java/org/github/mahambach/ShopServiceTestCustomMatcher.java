@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.github.mahambach.terminal.Setup.setupOrderList;
-import static org.github.mahambach.terminal.Setup.setupShopService;
+import static org.github.mahambach.ShopServiceAssert.*;
+import static org.github.mahambach.terminal.Setup.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ShopServiceTest {
+class ShopServiceTestCustomMatcher {
 
     @Test
     void placeOrder_whenOrder1_thenNumberOfOrdersPlusOne() {
@@ -20,18 +20,18 @@ class ShopServiceTest {
 
         shopService.placeOrder(order1);
 
-        assertEquals(oldNumberOfOrders+1, shopService.getAllOrders().size());
+        assertThat(shopService).hasNumberOfOrders(oldNumberOfOrders+1);
     }
 
     @Test
     void addProduct_whenProduct1_thenNumberOfProductsPlusOne() {
         ShopService shopService = new ShopService();
         Product product1 = new Product(102, "Smartphone", new BigDecimal("599.95"));
-        int numberOfProducts = shopService.getProductRepo().getProductList().size();
+        int oldNumberOfProducts = shopService.getProductRepo().getProductList().size();
 
         shopService.addProduct(product1);
 
-        assertEquals(numberOfProducts+1, shopService.getProductRepo().getProductList().size());
+        assertThat(shopService).hasNumberOfProducts(oldNumberOfProducts+1);
     }
 
     @Test

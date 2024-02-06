@@ -51,6 +51,10 @@ public class ShopService {
         return this.orderRepo.getAllOrders();
     }
 
+    public int getProductStockByID(int productID){
+        return this.productRepo.getProductQuantityByID(productID);
+    }
+
     public void stockProductByID(int productID, int quantity){
         this.productRepo.stockProductByID(productID, quantity);
     }

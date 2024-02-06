@@ -106,7 +106,7 @@ public class Setup {
         orderList.add(order10);
 
 
-        return new OrderMapRepo();
+        return new OrderMapRepo(orderList);
     }
 
     public static ShopService setupShopService(){

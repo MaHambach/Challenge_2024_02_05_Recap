@@ -116,4 +116,11 @@ public class ProductRepo {
         }
         System.out.println("Error: Product ID not found.");
     }
+
+    public int getProductQuantityByID(int productID) {
+        for(int i = 0; i < productList.size(); i++){
+            if(productList.get(i).productID() == productID) return productQuantities.get(i);
+        }
+        return 0;
+    }
 }
