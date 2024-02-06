@@ -1,5 +1,6 @@
 package org.github.mahambach;
 
+import javax.swing.plaf.IconUIResource;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,7 +41,19 @@ public class ShopService {
     public OrderRepo getOrderRepo() {
         return orderRepo;
     }
+    public void addProduct(Product product){
+        this.productRepo.addProduct(product);
+    }
+    public void addProduct(Product product, int quantity){
+        this.productRepo.addProduct(product, quantity);
+    }
+    public List<Order> getAllOrders(){
+        return this.orderRepo.getAllOrders();
+    }
 
+    public void stockProductByID(int productID, int quantity){
+        this.productRepo.stockProductByID(productID, quantity);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,5 +81,8 @@ public class ShopService {
 
     public List<Order> getAllOrdersOfCustomerID(String customerID){
         return this.orderRepo.getAllOrdersOfCustomerID(customerID);
+    }
+    public Product getProductByID(int id){
+        return this.productRepo.getProductByID(id);
     }
 }
